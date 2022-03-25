@@ -1,26 +1,36 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
     <title>SAL Maps</title>
-    
-    <link rel="stylesheet" type="text/css" href="./style.css" />
-    <script src="./index.js"></script>
-  </head>
-  <body>
-    <!--The div element for the map -->
-    <div id="map">
+</head>
+
+<body>
+    <div class="container">
+        <div class="title item">
+            <h1>Which service do you require?</h1>
+        </div>
+        <button id="amb" class="button item">
+            <h3 class="button_title">Ambulance</h3>
+            <img src="./images/amb.jpeg" alt="" class="icon">
+        </button>
+        <button id="fire" class="button item">
+            <h3 class="button_title">Fire Service</h3>
+            <img src="./images/fire.jpeg" alt="" class="icon">
+        </button>
+        <button id="ambfire" class="button item">
+            <h3 class="button_title">Fire Service and Ambulance</h3>
+            <div>
+                <img src="./images/amb.jpeg" alt="" class="icon">
+                <img src="./images/fire.jpeg" alt="" class="icon">
+            </div>
+        </button>
+        <button class="submit">Confirm</button>
     </div>
+</body>
 
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcQSmBY1QhFLMcfDHsIFp5YEgdj6I_Ge8&callback=initMap&v=weekly" async></script>
-  </body>
-  <style>
-      #map {
-        height: 95vh;
-        /* The height is 400 pixels */
-        width: 100%;
-        /* The width is the width of the web page */
-        }
-
-  </style>
 </html>

@@ -1,0 +1,43 @@
+*{
+    padding:0;
+    margin:0;
+}
+.container{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.item{
+    padding:10px;
+    margin: 10px;
+}
+
+.button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 40%;
+    height: 90px;
+    border: 2px rgb(248, 248, 248) solid;
+}
+
+.button_title{
+    align-self: center;
+}
+
+.icon{
+    height:50px;
+}
+.submit{
+    width: 15%;
+    height: 50px;
+    border: 2px rgb(255, 255, 255) solid;
+    border-radius:100px;
+    background-color: rgb(9, 9, 70);
+    color: white;
+    font-size: large;
+}
