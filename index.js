@@ -18,7 +18,7 @@ function initMap() {
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
     var mapOptions={
-        zoom: 18,
+        zoom: 15,
         center: user_location
     };
 

@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SAL Maps</title>
-    <script src="./index.js"></script>    
-  </head>
-  <body>
-    <!--The div element for the map -->
-    <div id="map">
-    </div>
 
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcQSmBY1QhFLMcfDHsIFp5YEgdj6I_Ge8&callback=initMap&v=weekly" async></script>
-  </body>
-  <style>
-      #map {
-        height: 95vh;
-        /* The height is 400 pixels */
-        width: 100%;
-        /* The width is the width of the web page */
-        }
+<head>
+  <title>SAL Maps</title>
+  <script src="./index.js"></script>
+  <link rel="stylesheet" href="./style.css">
+</head>
 
-  </style>
+<body>
+  <div class="container">        
+      <div class="title item">
+        <h1>Hang tight, Emergency Services are on the way!</h1>
+      </div>
+
+      <div id="map" class="item"></div>
+
+      <div class="details item container">
+        <p>Ambulance on the way,</p>
+        <p style="font-weight: bolder;">ETA: 14 minutes</p>
+        <p>Phone Number: +91-1234567890</p>
+        <p>Ambulance Number: KA 00 ML 1234</p>
+      </div>
+
+  </div>
+
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcQSmBY1QhFLMcfDHsIFp5YEgdj6I_Ge8&callback=initMap&v=weekly"
+    async></script>
+</body>
+<style>
+</style>
+
 </html>

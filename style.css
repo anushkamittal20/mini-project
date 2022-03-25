@@ -41,3 +41,27 @@
     color: white;
     font-size: large;
 }
+
+#map{
+    height: 80vh;
+    /* The height is 400 pixels */
+    width: 50%;
+    /* The width is the width of the web page */
+    border: 2px white solid;
+    border-radius:13px;
+}
+
+.details{
+    background-color: rgb(249, 99, 99);
+    border: 2px solid rgb(249, 99, 99);
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 150px;
+    width: 350px;
+}
+
+.details p{
+    padding: 5px;
+}
