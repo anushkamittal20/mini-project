@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>SAL Maps</title>
 </head>
 
@@ -14,23 +14,25 @@
         <div class="title item">
             <h1>Which service do you require?</h1>
         </div>
-        <button id="amb" class="button item">
+        <button id="ambulance" class="button item" onclick="chooseService(this,'ambulance')">
             <h3 class="button_title">Ambulance</h3>
             <img src="./images/amb.jpeg" alt="" class="icon">
         </button>
-        <button id="fire" class="button item">
+        <button id="fire" class="button item" onclick="chooseService(this,'fire')">
             <h3 class="button_title">Fire Service</h3>
             <img src="./images/fire.jpeg" alt="" class="icon">
         </button>
-        <button id="ambfire" class="button item">
+        <button id="ambfire" class="button item" onclick="chooseService(this,'fire and ambulance')">
             <h3 class="button_title">Fire Service and Ambulance</h3>
             <div>
                 <img src="./images/amb.jpeg" alt="" class="icon">
                 <img src="./images/fire.jpeg" alt="" class="icon">
             </div>
         </button>
-        <button class="submit">Confirm</button>
+        <p id="confirm-text"></p>
+        <button class="submit" onclick="confirmService()">Confirm</button>
+        <p id="location-text"></p>
     </div>
 </body>
-
+<script type="text/javascript" src="js/script.js"></script>
 </html>
