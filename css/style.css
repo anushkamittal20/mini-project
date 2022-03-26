@@ -65,3 +65,36 @@
 .details p{
     padding: 5px;
 }
+
+#floating-panel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    border: 2px rgb(0, 0, 0) solid;
+    border-radius: 5px;
+}
+
+.options{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+}
+
+.options b{
+    width:35px;
+}
+
+.options select{
+    width:250px;
+    border: 2px rgb(255, 255, 255) solid;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+}
+
+.floating-item{
+    padding:10px;
+}
