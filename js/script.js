@@ -40,7 +40,7 @@ function getLocation() {
 
 function showPosition(position) {
     console.log(position);
-      location_placeholder.innerHTML += "Your location is<br>Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+      location_placeholder.innerHTML = "Your location is<br>Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
 }
 
 
