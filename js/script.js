@@ -22,11 +22,23 @@ function confirmService(){
     else{
         console.log(`You have confirmed the ${chosenService}`);
         getLocation()
+        //await sleep(600)
+        setTimeout(()=>(alert('Gathering Location'),8000))
+        document.getElementById("loading-spinner").classList.toggle("hidden");
         // Simulate an HTTP redirect: (use href to get back button | replace() to make it one way only)
-        window.location.href = "html/ETA.html";
-        
+        setTimeout(()=>window.location.href = "html/ETA.html",4000);
+       // window.location.href = "html/ETA.html"
+        //window.location.replace('html/ETA.html')
     }
 }
+
+// const sleep = (milliseconds) => {
+//     return new Promise(resolve => setTimeout(resolve, milliseconds))
+// }
+
+
+// function goToA
+
 
 
 var location_placeholder = document.getElementById("location-text");
