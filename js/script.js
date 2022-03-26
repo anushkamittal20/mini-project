@@ -22,6 +22,9 @@ function confirmService(){
     else{
         console.log(`You have confirmed the ${chosenService}`);
         getLocation()
+        // Simulate an HTTP redirect: (use href to get back button | replace() to make it one way only)
+        window.location.href = "html/ETA.html";
+        
     }
 }
 
