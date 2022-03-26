@@ -1,13 +1,13 @@
 var user_location = { lat: 13.0146, lng: 77.5830};
-var amb = {lat:13.0147, lng:77.5810};
-var rit = {lat:13.0306, lng:77.5649};
+var amb = {lat:13.0147,lng:77.5810};
+var rit = {lat:13.0306,lng:77.5649};
 
 function initMap() {
     const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer();
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 7,
-      center: { lat: 12.9716, lng: 77.5946},
+      zoom: 15,
+      center: { lat:13.0306,lng:77.5649}, //coordinates of rit
     });
   
     directionsRenderer.setMap(map);
