@@ -6,27 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/path.js"></script>
-    <title>SAL Maps</title>
+    <title>SAL Maps - Path generation</title>
 </head>
 
 <body>
+    <p class="title">Path generation: Enter the source and destination</p>
+    <div class="near" id="near">
+        <div class="icon">
+            <img src="../images/ambulance_logo.png" alt="">
+        </div>
+        <div class="text">
+            <p class="alert">Alert!</p>
+            <p class="alert">Please make way to the right</p>
+            <p class="alert">Emergency services need this path</p>
+        </div>
+        <div class="icon">
+            <img src="../images/right_arrow.png" alt="">
+        </div>
+    </div>
     <div class="container">
         <div class="item" id="floating-panel">
             <div class="options">
                 <b class="floating-item">Start: </b>
                 <select class="floating-item" id="start">
-                  <option value="{13.0283,77.5731}">Truffles</option>
-                  <option value="{13.0665,77.5980}">Skyline Beverly Park</option>
-                  <option value="{13.0147,77.5810}">McDonald's</option>
+                    <option value="{13.0283,77.5731}">Truffles</option>
+                    <option value="{13.0665,77.5980}">Skyline Beverly Park</option>
+                    <option value="{13.0147,77.5810}">McDonald's</option>
                 </select>
             </div>
             <div class="options">
                 <b class="floating-item">End: </b>
-                <select id="end" class="floating-item">
-                  <option value="{13.0306,77.5649}">Ramaiah Institute of technology</option>
-                  <option value="{13.0328,77.5697}">Milanos</option> 
-                  <option value="{12.973826,77.590591}">Cubbon Park</option> 
+                <select class="floating-item" name="end" id="end">
+                    <option value="{13.0306,77.5649}">Ramaiah Institute of technology</option>
+                    <option value="{13.0328,77.5697}">Milanos</option>
+                    <option value="{12.973826,77.590591}">Cubbon Park</option>
                 </select>
             </div>
         </div>
@@ -37,6 +50,7 @@
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcQSmBY1QhFLMcfDHsIFp5YEgdj6I_Ge8&callback=initMap&v=weekly"
         async></script>
+    <script src="../js/path.js"></script>
 </body>
 
 </html>

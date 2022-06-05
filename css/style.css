@@ -56,6 +56,28 @@ body{
     border-radius:13px;
 }
 
+.near{
+    background-color: #0000a1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 150px;
+    width: 423px;
+    margin: auto;
+    border: 2px white solid;
+    border-radius: 16px;
+    display: none;
+}
+.text{
+    color:white;
+    text-align: center;
+    font-weight: 500;
+}
+.icon img{
+    width:50px;
+}
+
 .details{
     background-color: rgb(249, 99, 99);
     border: 2px solid rgb(249, 99, 99);
@@ -129,4 +151,11 @@ body{
 
 .visible{
     visibility: visible;
+}
+
+.title{
+    margin: 10px;
+    text-align: center;
+    font-size: x-large;
+    font-weight: 600;
 }
