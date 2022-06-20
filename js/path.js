@@ -48,12 +48,9 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
       routeResult = response.routes[0];
       console.log(routeResult)
 
-
-      console.log("Display polyline")
-      rawPolyline = routeResult.overview_polyline;
-      console.log(rawPolyline)
-
-      decodedPolyline = decodePath(rawPolyline); //2D array consisting of waypoints lat & long
+      updatePolyline();
+      
+      //2D array consisting of waypoints lat & long
       var count=0;
 
       //filtering through decodedPolyline to set waypoints at a distance of 500 meters
@@ -74,7 +71,6 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
       }
         return false;
       });
-
       //place markers below 
       // console.log("waypoints length: " + waypoints.length);
       // for(var i=0;i<waypoints.length;i++){
@@ -86,6 +82,47 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
       // console.log("radius=" + radius);
     })
     .catch((e) => window.alert("Directions request failed due to " + e));
+}
+
+//driver function
+function IntersectionAlgorithm(){
+    updatePolyline();
+    updateWaypoints();
+    generateWaypoints();  
+    var coordinate;
+    for(var i=1;i<=2;i++){
+      coordinate=convertWaypointstoCoordinates();
+      //retrive user's current location
+      userLocatedWithinRadius(,coordinate,0.250);
+      
+    }
+    
+}
+
+function convertWaypointstoCoordinates(){
+    return {lat:immediateWaypoints[0][0],lng:immediateWaypoints[0][1]};
+}
+
+function generateWaypoints(){
+  immediateWaypoints=[waypoints[0],waypoints[1]]
+}  
+
+function updateWaypoints()
+{
+  //to check the array of waypoints left for the ambulance to cover
+  //returns an object of the lat & long of next 2 waypoints
+  if(decodedPolyline.includes(waypoints[0])){
+    return;
+  }
+  else{
+    waypoints.shift();
+  }
+}
+
+function updatePolyline()
+{  
+  rawPolyline = routeResult.overview_polyline;
+  decodedPolyline = decodePath(rawPolyline);
 }
 
 
