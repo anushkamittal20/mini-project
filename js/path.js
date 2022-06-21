@@ -1,18 +1,111 @@
-
 var amb = { lat: 13.0147, lng: 77.5810 };
 var rit = { lat: 13.0306, lng: 77.5649 };
 var user_location = { lat: 13.0326, lng: 77.5697 };
 var waypoint = { lat: 13.0328, lng: 77.5697 };
 var selectElement = document.getElementById("end");
-var map = 0, marker_user = 0, popup = 0;
-var routeResult, rawpolyline, decodedPolyline, waypoints;
+var map = 0, marker_user = 0, popup = 0,marker_user1,marker;
+var markers = [];
+var routeResult, rawpolyline, decodedPolyline, waypoints, immediateWaypoints,waypoint_markers;
+var directionsService;
+  var directionsRenderer;
+
+var amb_button=document.getElementById("amb");
+var user_button=document.getElementById("user");
+var waypoint_button=document.getElementById("waypointer");
+
+function displayWaypoints(){
+  for(var i=0;i<waypoints.length;i++){
+      marker = new google.maps.Marker({
+      position: {lat:waypoints[i][0],lng:waypoints[i][1]}, //pass the user's location
+      map: map,
+      icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    });
+    markers.push(marker);
+  }
+  setTimeout(removeWaypoints, 2500);
+}
+
+function removeWaypoints(){
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+    }
+}
 
 
 
+function generateUser(){
+  var decider=Math.floor(Math.random()*10)+1;
+  var lat_new,lng_new;
+
+  console.log("orig: "+waypoints[1]);
+  console.log("first waypoint: "+waypoints[2]);
+ 
+  if(decider%2==0)
+  {
+    //generate user that is close
+    if(waypoints[1][0]>waypoints[2][0]){
+      // update lat of 
+      lat_new=waypoints[1][0]-0.0002
+      lng_new=waypoints[1][1]-0.0002
+    } 
+    else if(waypoints[1][1]>waypoints[2][1]){
+      
+      lat_new=waypoints[1][0]-0.0002
+      lng_new=waypoints[1][1]-0.0002
+    }
+    else if(waypoints[1][0]<waypoints[2][0]){
+      //moving to the right
+      lat_new=waypoints[1][0]+0.0002
+      lng_new=waypoints[1][1]+0.0002
+    }
+    else{
+      
+      lat_new=waypoints[1][0]+0.0002
+      lng_new=waypoints[1][1]+0.0002
+    }
+    console.log("close")
+  }
+  else{
+    //generate user far from path
+    console.log("far")
+    lat_new=waypoints[1][0]+0.007
+    lng_new=waypoints[1][1]
+  }
+  console.log(lat_new);
+  var user={lat:lat_new,lng:lng_new};
+  PlaceMarker(user);
+  PlaceWaypointMarker({lat:waypoints[1][0],lng:waypoints[1][1]});
+  if(userLocatedWithinRadius(user, {lat:waypoints[1][0],lng:waypoints[1][1]}, 0.250)){
+    displayToggle();
+  }
+}
+
+function moveAmbulance(){
+  console.log("inside move amb")
+  var y={lat:waypoints[0][0],lng:waypoints[0][1]}
+  console.log(y);
+  directionsService
+  .route({
+    origin:y,
+    destination: {
+      query: document.getElementById("end").value,
+    },
+    travelMode: google.maps.TravelMode.DRIVING,
+  })
+  .then((response) => {
+    directionsRenderer.setDirections(response);
+  }).catch((e) => window.alert("Directions request failed due to " + e));
+  waypoints.shift();
+  console.log("length of wayp[oints: "+waypoints.length)
+}
+
+amb_button.addEventListener("click",moveAmbulance);
+user_button.addEventListener("click",generateUser);
+waypoint_button.addEventListener("click",displayWaypoints);
 
 function initMap() {
-  const directionsService = new google.maps.DirectionsService();
-  const directionsRenderer = new google.maps.DirectionsRenderer();
+   directionsService = new google.maps.DirectionsService();
+   directionsRenderer = new google.maps.DirectionsRenderer();
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 15,
     center: { lat: 13.0306, lng: 77.5649 }, //coordinates of rit
@@ -85,7 +178,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
 }
 
 //driver function
-function IntersectionAlgorithm(){
+function intersectionAlgorithm(){
     updatePolyline();
     updateWaypoints();
     generateWaypoints();  
@@ -93,11 +186,35 @@ function IntersectionAlgorithm(){
     for(var i=1;i<=2;i++){
       coordinate=convertWaypointstoCoordinates();
       //retrive user's current location
-      userLocatedWithinRadius(,coordinate,0.250);
-      
+      userLocatedWithinRadius(getUsersLocation(),coordinate,0.250);
     }
     
 }
+
+
+function getUsersLocation(){
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        console.log(pos)
+      },
+      () => {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
+  } 
+  else 
+  {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+}
+
+
 
 function convertWaypointstoCoordinates(){
     return {lat:immediateWaypoints[0][0],lng:immediateWaypoints[0][1]};
@@ -118,6 +235,7 @@ function updateWaypoints()
     waypoints.shift();
   }
 }
+
 
 function updatePolyline()
 {  
@@ -200,21 +318,32 @@ function PlaceMarker(x) {
     icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
   });
 }
+
+function PlaceWaypointMarker(x) {
+
+  // setTimeout(function(){
+  marker_user1 = new google.maps.Marker({
+    position: x, //pass the user's location
+    map: map,
+    icon: 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png',
+  });
+}
 // ,10000); }
 
 
 
-selectElement.addEventListener('change', (event) => {
-  var x = selectElement.value
-  if (userLocatedWithinRadius(user_location, waypoint, 2000)) {
-    //setTimeout(PlaceMarker(user_location),10000);
-    PlaceMarker(user_location);
-    setTimeout(displayToggle, 15000);
-    //displayToggle();
-  }
-});
+// selectElement.addEventListener('change', (event) => {
+//   var x = selectElement.value
+//   if (userLocatedWithinRadius(user_location, waypoint, 2000)) {
+//     //setTimeout(PlaceMarker(user_location),10000);
+//     PlaceMarker(user_location);
+//     setTimeout(displayToggle, 15000);
+//     //displayToggle();
+//   }
+// });
 
 function displayToggle() {
+  console.log("in display toggle");
   popup = document.getElementById("near");
   popup.style.display = "flex";
 
@@ -225,14 +354,8 @@ function displayToggle() {
 
 function removeUser() {
   marker_user.setMap(null);
-
   setTimeout(function () { popup.style.display = "none"; }, 3000);
-
-
 }
-
-
-
 
 function decodePath(str, precision) {
   var index = 0,
