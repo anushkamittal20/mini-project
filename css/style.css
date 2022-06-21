@@ -78,6 +78,28 @@ body{
     width:50px;
 }
 
+
+.buttons{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.button{
+    margin: 10px ;
+    padding: 11px;
+    height: 57px;
+    border: solid white 2px;
+    border-radius: 9px;
+    background-color: #fd7676;
+    font-family: system-ui;
+    font-weight: 500;
+    width: 166px;
+    padding-left: 33px;
+}
+
 .details{
     background-color: rgb(249, 99, 99);
     border: 2px solid rgb(249, 99, 99);
