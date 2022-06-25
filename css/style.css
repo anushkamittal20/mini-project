@@ -5,7 +5,25 @@
 
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(-45deg, #ffb39b, #ff94bd, #90daf5, #90f9e0);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: 100vh;
 }
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
 
 .container{
     display: flex;
@@ -85,7 +103,7 @@ body{
 .user_buttons button{
     margin: auto;
     height: 76px;
-    width: 206px;
+    /*width: 206px;*/
 } 
 
 .buttons{
@@ -109,8 +127,29 @@ body{
     padding-left: 33px;
 }
 
+.choice{
+    width: 300px;
+    padding: 10px 20px;
+	border-radius: 6px;
+	border-width: 2px;
+	border-style: solid;
+	font-size: 20px;
+	font-family: 'Ubuntu', sans-serif;
+	cursor: pointer;
+	transition: 0.5s ease;
+    color: #FFF;
+    background: #2196F3;
+    border-color: #2196F3;
+}
+
+.user_buttons :hover{
+    color: #2196F3;
+    background: rgba(255, 255, 255, 0.75);
+    font-weight: bolder;
+}
+
 .bright{
-    padding-left: 50px;
+    padding :10px 40px;
 }
 
 .bleft{
