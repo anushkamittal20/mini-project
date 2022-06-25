@@ -78,6 +78,15 @@ body{
     width:50px;
 }
 
+.user_buttons{
+    height:100vh;
+}
+
+.user_buttons button{
+    margin: auto;
+    height: 76px;
+    width: 206px;
+} 
 
 .buttons{
     display: flex;
@@ -98,6 +107,14 @@ body{
     font-weight: 500;
     width: 166px;
     padding-left: 33px;
+}
+
+.bright{
+    padding-left: 50px;
+}
+
+.bleft{
+    padding-left: 25px;
 }
 
 .details{
