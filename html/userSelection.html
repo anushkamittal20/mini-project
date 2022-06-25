@@ -4,22 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">   
-    <script src="../js/script.js"></script>
+    <link rel="stylesheet" href="../css/style.css"> 
     <title>SAL Maps</title>
 </head>
 <body>
+    <p class="user_type">Select the type of User View</p>
     <div class="buttons user_buttons">
+       <div class="info_container">
         <button class="choice_btn" id="bleft">Avail Emergency Services</button>
+        <ul>
+            <li>Prototype for a user in need of an emergency service</li>
+            <li>Emulates the screen when the user hits the emergency button</li>
+            <li>Array of emergency service providers to choose from</li>
+            <li>Consentual precise user location is gathered</li>
+            <li>User can track emergency service provider</li>
+            <li>ETA of emergency service provider, driver, & paramedics numbers are displayed</li>
+        </ul>
+       </div>
+       <div class="info_container">
         <button class="choice_btn" id="bright">Proof of Concept</button>
-    </div>
+        <ul>
+            <li>Dyanmic Generation of Waypoints</li>
+            <li>Generation of optimised path from a set of hardcoded points</li>
+            <li>Generation of randomised user in close proximity to path </li>
+            <li>Generation of randomised user far from path </li>
+            <li>Generation of moving data (ambulance's location)</li>
+            <li>Notifying Users on the path to make way</li>
+        </ul>
+       </div>
+    </div>      
+    <script src="../js/script.js"></script>
 </body>
 
 <style>
     body{
-    background: linear-gradient(-45deg, #ffb39b, #ff94bd, #90daf5, #90f9e0);
+    background: linear-gradient(-45deg, #deffca, #ffd6e7, #d6f5ff, #fcffd5);
 	background-size: 400% 400%;
-	animation: gradient 10s ease infinite;
+	animation: gradient 15s ease infinite;
 	height: 100vh;
     }
 

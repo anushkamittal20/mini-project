@@ -66,3 +66,18 @@ function clearAllButtons(){
     for (var i = 0; i < buttons.length; i += 1)
         buttons[i].classList.remove("chosen-green");
 }
+
+function goTo(s){
+    console.log(s)
+    window.location.href=s
+}
+
+var user1=document.getElementById("bleft")
+var user2=document.getElementById("bright")
+
+user1.addEventListener('click',function(){
+    goTo("../index.html");
+})
+user2.addEventListener('click',function(){
+    goTo("path.html");
+})
