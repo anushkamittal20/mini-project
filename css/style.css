@@ -26,6 +26,7 @@ body{
     align-items: center;
     flex-direction: row;
     width: 40%;
+    cursor:pointer;
     height: 90px;
     border: 2px rgb(248, 248, 248) solid;
 }
@@ -40,6 +41,7 @@ body{
 .submit{
     width: 15%;
     height: 50px;
+    cursor: pointer;
     border: 2px rgb(255, 255, 255) solid;
     border-radius:100px;
     background-color: rgb(9, 9, 70);
