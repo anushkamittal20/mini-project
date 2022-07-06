@@ -11,19 +11,7 @@
 
 <body>
     <p class="title">Path generation: Enter the source and destination</p>
-    <div class="near" id="near">
-        <div class="icon">
-            <img src="/images/ambulance_logo.png" alt="">
-        </div>
-        <div class="text">
-            <p class="alert">Alert!</p>
-            <p class="alert">Please make way to the right</p>
-            <p class="alert">Emergency services need this path</p>
-        </div>
-        <div class="icon">
-            <img src="/images/right_arrow.png" alt="">
-        </div>
-    </div>
+
     <div class="container">
         <div class="item" id="floating-panel">
             <div class="options">
@@ -46,7 +34,20 @@
         <div class="buttons">
             <button class="button_p" id="amb">Move Ambulance</button>
             <button class="button_p" id="waypointer">Generate waypoints</button>
-            <button class="button_p" id="user" style="display: hidden;">Generate User</button>
+            <button class="button_p" id="user" style="display: none;">Generate User</button>
+        </div>
+        <div class="near" id="near">
+            <!-- <div class="icon">
+                <img src="/images/ambulance_logo.png" alt="">
+            </div> -->
+            <div class="text">
+                <p class="alert">You have arrived at your destination</p>
+                <!-- <p class="alert">Please make way to the right</p>
+                <p class="alert">Emergency services need this path</p> -->
+            </div>
+            <!-- <div class="icon">
+                <img src="/images/right_arrow.png" alt="">
+            </div> -->
         </div>
         <div class="item" id="map"></div>
     </div>

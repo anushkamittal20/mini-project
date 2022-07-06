@@ -3,7 +3,7 @@ var rit = { lat: 13.0306, lng: 77.5649 };
 var user_location = { lat: 13.0326, lng: 77.5697 };
 var waypoint = { lat: 13.0328, lng: 77.5697 };
 var selectElement = document.getElementById("end");
-var map = 0, marker_user = 0, popup = 0,marker_user1,marker;
+var map = 0, marker_user = 0, popup = 0,marker_user1,marker, count=1;
 var markers = [];
 var routeResult, rawpolyline, decodedPolyline, waypoints, immediateWaypoints,waypoint_markers;
 var directionsService;
@@ -96,6 +96,23 @@ function moveAmbulance(){
     directionsRenderer.setDirections(response);
   }).catch((e) => window.alert("Directions request failed due to " + e));
   waypoints.shift();
+  if(waypoints.length == 0 && count ==1){
+    var end_point = document.getElementById("end").value;
+    end_point = end_point.slice(1, end_point.length-1)
+    end_point = end_point.split(",")
+    // end_point
+    end_point_coordinate = end_point.map(Number)
+    waypoints[0] = end_point_coordinate
+    // waypoints[0][0] = parseFloat(end_point[0])
+    // waypoints[0][1] = parseFloat(end_point[1])
+    console.log('printing 0th',waypoints[0]);
+    count--;
+  }
+  else{
+    if(waypoints.length == 0 && count ==0){
+      displayToggle()
+    }
+  }
   sendWaypointsToServer(waypoints)
   console.log("length of wayp[oints: "+waypoints.length)
 }
@@ -116,6 +133,8 @@ function initMap() {
   directionsRenderer.setMap(map);
 
   const onChangeHandler = function () {
+    count = 1;
+    removeUser()
     calculateAndDisplayRoute(directionsService, directionsRenderer);
   };
 
@@ -369,14 +388,15 @@ function displayToggle() {
   popup = document.getElementById("near");
   popup.style.display = "flex";
 
-  setTimeout(removeUser, 5000);
+  // setTimeout(removeUser, 5000);
   // removeUser();
 
 }
 
 function removeUser() {
-  marker_user.setMap(null);
-  setTimeout(function () { popup.style.display = "none"; }, 3000);
+  // marker_user.setMap(null);
+  // setTimeout(function () { popup.style.display = "none"; }, 3000);
+  near.style.display = "none";
 }
 
 function decodePath(str, precision) {
