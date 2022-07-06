@@ -73,11 +73,15 @@ function goTo(s){
 }
 
 var user1=document.getElementById("bleft")
-var user2=document.getElementById("bright")
+var user2=document.getElementById("bmid")
+var user3=document.getElementById("bright")
 
 user1.addEventListener('click',function(){
     goTo("../index.html");
 })
 user2.addEventListener('click',function(){
     goTo("../user-side/path.html");
+})
+user3.addEventListener('click',function(){
+    goTo("../ambulance-server/client_side/path.html");
 })

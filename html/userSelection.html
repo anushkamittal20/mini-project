@@ -8,28 +8,35 @@
     <title>SAL Maps</title>
 </head>
 <body>
-    <p class="user_type">Select the type of User View</p>
+    <p class="user_type">Select the type of Use Case</p>
     <div class="buttons user_buttons">
        <div class="info_container">
-        <button class="choice_btn" id="bleft">Avail Emergency Services</button>
+        <button class="choice_btn" id="bleft">User Availing Emergency Services</button>
         <ul>
             <li>Prototype for a user in need of an emergency service</li>
             <li>Emulates the screen when the user hits the emergency button</li>
             <li>Array of emergency service providers to choose from</li>
-            <li>Consentual precise user location is gathered</li>
+            <li>Consensual precise user location is gathered</li>
             <li>User can track emergency service provider</li>
             <li>ETA of emergency service provider, driver, & paramedics numbers are displayed</li>
         </ul>
        </div>
        <div class="info_container">
-        <button class="choice_btn" id="bright">Proof of Concept</button>
+        <button class="choice_btn" id="bmid">General Public User Navigating</button>
+        <ul>
+            <li>Dyanmic Generation of Waypoints</li>
+            <li>Generation of optimised path from a set of hard-coded points</li>
+            <li>Generation of moving data (user's location)</li>
+            <li>Notifying Users on the path to make way</li>
+        </ul>
+       </div>
+       <div class="info_container">
+        <button class="choice_btn" id="bright">Emergency Service Provider Navigating</button>
         <ul>
             <li>Dyanmic Generation of Waypoints</li>
             <li>Generation of optimised path from a set of hardcoded points</li>
-            <li>Generation of randomised user in close proximity to path </li>
-            <li>Generation of randomised user far from path </li>
-            <li>Generation of moving data (ambulance's location)</li>
-            <li>Notifying Users on the path to make way</li>
+            <li>Generation of moving data (Emergency Service Provider's location)</li>
+            <li>Detecting Users on the path to make way by notifying them ahead of time</li>
         </ul>
        </div>
     </div>      
