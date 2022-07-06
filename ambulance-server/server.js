@@ -23,17 +23,35 @@ app.get('/info',(req,res)=>{
     res.status(200).json({info: 'hey'})
 })
 
+// app.post('/',(req,res)=>{
+//     // const { parcel } = req.body
+//     var src = req.body.source
+//     var dest = req.body.destination
+//     console.log('source : ',src);
+//     console.log('destination : ',dest);
+//     res.status(200).send({status: 'recieved',
+//         source: src,
+//         destination: dest  
+//     })
+// })
+
 app.post('/',(req,res)=>{
     // const { parcel } = req.body
-    var src = req.body.source
-    var dest = req.body.destination
-    console.log('source : ',src);
-    console.log('destination : ',dest);
+    var polyline = req.body.polyline
+    var first_point = req.body.first_point
+    // var dest = req.body.destination
+    console.log('\n\nFirst Point', first_point, '\n\n');
+    console.log('polyline : ',polyline);
+    // console.log('destination : ',dest);
     res.status(200).send({status: 'recieved',
-        source: src,
-        destination: dest  
+        recieved: polyline,
+        next_point: first_point
+        // destination: dest  
     })
 })
+
+
+
 
 app.post('/ambulance/routes',async(req,res)=>{
     try {
