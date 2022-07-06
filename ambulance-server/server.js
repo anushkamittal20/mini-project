@@ -3,6 +3,21 @@ const bodyParser = require('body-parser')
 const app = express()
 let cors = require('cors')
 app.use(cors())
+
+const redis = require('ioredis')
+const password = "NZ5CaYKiyD08ITMfToscbcx3sJqQkKXD"
+const redisClient = redis.createClient({host:'redis-10983.c299.asia-northeast1-1.gce.cloud.redislabs.com',port:10983,username:'default',password:password});
+
+redisClient.on('connect',() => {
+    console.log('connected to redis successfully!');
+    // client.set("test", "hello")
+  // authenticate()  
+})
+redisClient.on('error',(error) => {
+    console.log('Redis connection error :', error);
+})
+
+
 app.use((req,res,next)=>{
     res.setHeader('Access-Control-Allow-Origin','*');
     res.setHeader('Access-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
@@ -48,10 +63,21 @@ app.post('/',(req,res)=>{
         next_point: first_point
         // destination: dest  
     })
+
+ 
+    
+    sendNextWaypoint(first_point)
+    // redisClient.disconnect()
+
 })
 
 
-
+async function sendNextWaypoint(next_point){
+    next_point_json = JSON.stringify(next_point)
+    redisClient.set("ambulanceOne", next_point_json)
+    const test = await redisClient.get("ambulanceOne")
+    console.log(test);
+}
 
 app.post('/ambulance/routes',async(req,res)=>{
     try {
