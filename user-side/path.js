@@ -10,80 +10,14 @@ var directionsService;
   var directionsRenderer;
 
 var amb_button=document.getElementById("amb");
-// var user_button=document.getElementById("user");
-// var waypoint_button=document.getElementById("waypointer");
-
-// function displayWaypoints(){
-//   for(var i=0;i<waypoints.length;i++){
-//       marker = new google.maps.Marker({
-//       position: {lat:waypoints[i][0],lng:waypoints[i][1]}, //pass the user's location
-//       map: map,
-//       icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-//     });
-//     markers.push(marker);
-//   }
-//   setTimeout(removeWaypoints, 2500);
-// }
-
-// function removeWaypoints(){
-//     for (var i = 0; i < markers.length; i++) {
-//       markers[i].setMap(null);
-//     }
-// }
-
-
-
-// function generateUser(){
-//   var decider=Math.floor(Math.random()*10)+1;
-//   var lat_new,lng_new;
-
-//   console.log("orig: "+waypoints[1]);
-//   console.log("first waypoint: "+waypoints[2]);
- 
-//   if(decider%2==0)
-//   {
-//     //generate user that is close
-//     if(waypoints[1][0]>waypoints[2][0]){
-//       // update lat of 
-//       lat_new=waypoints[1][0]-0.0002
-//       lng_new=waypoints[1][1]-0.0002
-//     } 
-//     else if(waypoints[1][1]>waypoints[2][1]){
-      
-//       lat_new=waypoints[1][0]-0.0002
-//       lng_new=waypoints[1][1]-0.0002
-//     }
-//     else if(waypoints[1][0]<waypoints[2][0]){
-//       //moving to the right
-//       lat_new=waypoints[1][0]+0.0002
-//       lng_new=waypoints[1][1]+0.0002
-//     }
-//     else{
-      
-//       lat_new=waypoints[1][0]+0.0002
-//       lng_new=waypoints[1][1]+0.0002
-//     }
-//     console.log("close")
-//   }
-//   else{
-//     //generate user far from path
-//     console.log("far")
-//     lat_new=waypoints[1][0]+0.007
-//     lng_new=waypoints[1][1]
-//   }
-//   console.log(lat_new);
-//   var user={lat:lat_new,lng:lng_new};
-//   PlaceMarker(user);
-//   PlaceWaypointMarker({lat:waypoints[1][0],lng:waypoints[1][1]});
-//   if(userLocatedWithinRadius(user, {lat:waypoints[1][0],lng:waypoints[1][1]}, 0.250)){
-//     displayToggle();
-//   }
-// }
+var switch_button=document.getElementById("switch");
 
 function moveUser(){
   console.log("inside move user")
   var y={lat:waypoints[0][0],lng:waypoints[0][1]}
+  PlaceMarker(y);
   console.log(y);
+  comparedist(y);
   directionsService
   .route({
     origin:y,
@@ -97,7 +31,7 @@ function moveUser(){
   }).catch((e) => window.alert("Directions request failed due to " + e));
   waypoints.shift();
   console.log("length of wayp[oints: "+waypoints.length)
-  hello();
+  
 }
 
 amb_button.addEventListener("click",moveUser);
@@ -163,62 +97,32 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
       }
         return false;
       });
-      console.log(waypoint)
     })
     .catch((e) => window.alert("Directions request failed due to " + e));
 }
 
 //driver function
 function intersectionAlgorithm(){
+  console.log("Inside intersection algorithm")
     updatePolyline();
     updateWaypoints();
     generateWaypoints();  
     var coordinate;
-    var amb_waypoint=db_get_wp();
-    var amb_cor = { lat: amb_waypoint[0][0], lng: amb_waypoint[0][1] };
-    //get a waypoint (2 later), convert to coordinates
-   // for(var i=1;i<=2;i++){
-      coordinate=convertWaypointstoCoordinates();
-      //retrive user's current location
-     // userLocatedWithinRadius(getUsersLocation(),coordinate,0.250);
+    coordinate=convertWaypointstoCoordinates();
+     console.log("check coordinates")
      console.log(coordinate)
-     if( userLocatedWithinRadius(coordinate,amb_cor,0.250)) {
-      displayToggle();
-      // break;
-     } else{
-      console.log("far away: no notification")
-     }
-
-      //chnages here, get UserLocation will become get next waypoint in user path
-      //coordinate will become get next Waypoints from ambulance path
-  //  }
-    
+     comparedist(start)
 }
 
-
-// function getUsersLocation(){
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(
-//       (position) => {
-//         const pos = {
-//           lat: position.coords.latitude,
-//           lng: position.coords.longitude,
-//         };
-//         console.log(pos)
-//       },
-//       () => {
-//         handleLocationError(true, infoWindow, map.getCenter());
-//       }
-//     );
-//   } 
-//   else 
-//   {
-//     // Browser doesn't support Geolocation
-//     handleLocationError(false, infoWindow, map.getCenter());
-//   }
-// }
-
-
+function comparedist(coordinate){
+  var amb_cor=hello();
+  if( userLocatedWithinRadius(coordinate,amb_cor,0.250)) {
+    displayToggle();
+    // break;
+   } else{
+    console.log("far away: no notification")
+   }
+}
 
 function convertWaypointstoCoordinates(){
     return {lat:immediateWaypoints[0][0],lng:immediateWaypoints[0][1]};
@@ -247,35 +151,6 @@ function updatePolyline()
   decodedPolyline = decodePath(rawPolyline);
   console.log(decodedPolyline)
 }
-
-
-// //finding minimum distance between 2 consecutive waypoints to find the minimum radius value 
-// function findMinDistance() {
-//   // Initialize difference as infinite
-//   var diff = 99999999, p, k;
-//   // Find the min diff by comparing difference
-//   // of all possible pairs in given array
-//   for (var i = 0; i < waypoints.length; i++) 
-//   {
-//     for (var j = i + 1; j < waypoints.length; j++) 
-//     {
-//         var dis = distance(waypoints[i][0], waypoints[j][0], waypoints[i][1], waypoints[j][1]);
-//         console.log(dis)
-//         if (dis < diff && dis != 0) 
-//         {
-//           diff = dis;
-//           p = i; k = j;
-//         }
-//     }
-//   }
-//   // Return min diff {lat:13.0147,lng:77.5810};
-
-//   var newcor = { lat: waypoints[p][0], lng: waypoints[p][1] };
-
-//   var newcor1 = { lat: waypoints[k][0], lng: waypoints[k][1] };
-//   // PlaceMarker({lat:waypoints[k][0],lng:waypoints[k][1]})
-//   return diff;
-// }
 
 
 function distance(lat1, lat2, lon1, lon2) {
@@ -339,15 +214,15 @@ function displayToggle() {
   popup = document.getElementById("near");
   popup.style.display = "flex";
 
-  setTimeout(removeUser, 5000);
+  setTimeout(removeUser, 8000);
   // removeUser();
 
 }
 
-// function removeUser() {
-//   marker_user.setMap(null);
-//   setTimeout(function () { popup.style.display = "none"; }, 3000);
-// }
+function removeUser() {
+  marker_user.setMap(null);
+  setTimeout(function () { popup.style.display = "none"; }, 3000);
+}
 
 function decodePath(str, precision) {
   var index = 0,
