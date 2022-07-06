@@ -12,10 +12,14 @@ const client = redis.createClient({
   }
 
   async function db_get_wp() {
-   return amb_wp = await client.get("next_wp")
+  return amb_wp = await client.get("next_wp")   //get from redis
+  // var amb = {lat: 13.01182, lng: 77.58379};
+  // return amb
   }
 
 app.get('/',(req,res) => {
+  // const wp=db_get_wp()
+  // res.status(200).send(wp)
     res.status(200).send('<h1>Functionalities for user-server communication</h1>')
 })
 

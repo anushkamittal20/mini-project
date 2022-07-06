@@ -115,7 +115,10 @@ function intersectionAlgorithm(){
 }
 
 function comparedist(coordinate){
-  var amb_cor=hello();
+ var amb_cor=hello();
+//  var amb_cor=getWpFromServer();
+//  console.log("in compare")
+//  console.log(amb_cor)
   if( userLocatedWithinRadius(coordinate,amb_cor,0.250)) {
     displayToggle();
     // break;
@@ -123,6 +126,17 @@ function comparedist(coordinate){
     console.log("far away: no notification")
    }
 }
+
+// async function getWpFromServer(){
+//   const baseUrl = 'http://localhost:8080'
+//   console.log('in the server receiving function')
+//   const res = await fetch(baseUrl,{
+//     method: 'GET',
+//   })
+// const data= await res.json();
+// return JSON.parse(data)
+
+// }
 
 function convertWaypointstoCoordinates(){
     return {lat:immediateWaypoints[0][0],lng:immediateWaypoints[0][1]};
@@ -195,7 +209,7 @@ function PlaceMarker(x) {
   marker_user = new google.maps.Marker({
     position: x, //pass the user's location
     map: map,
-    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    icon: 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png',
   });
 }
 
