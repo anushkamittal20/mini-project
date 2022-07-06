@@ -37,14 +37,14 @@ app.get('/info',(req,res)=>{
 
 app.post('/',(req,res)=>{
     // const { parcel } = req.body
-    var polyline = req.body.polyline
+    var waypoints = req.body.waypoints
     var first_point = req.body.first_point
     // var dest = req.body.destination
     console.log('\n\nFirst Point', first_point, '\n\n');
-    console.log('polyline : ',polyline);
+    console.log('polyline : ',waypoints);
     // console.log('destination : ',dest);
     res.status(200).send({status: 'recieved',
-        recieved: polyline,
+        recieved: waypoints,
         next_point: first_point
         // destination: dest  
     })

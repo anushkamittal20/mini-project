@@ -203,7 +203,7 @@ async function sendWaypointsToServer(calc_polyline){
     },
     body:JSON.stringify({
       first_point: calc_polyline[0],
-      polyline : calc_polyline
+      waypoints : calc_polyline
     })
   })
 
