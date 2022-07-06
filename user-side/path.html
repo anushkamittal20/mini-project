@@ -11,19 +11,7 @@
 
 <body>
     <p class="title">Path generation: Enter the source and destination</p>
-    <div class="near" id="near">
-        <div class="icon">
-            <img src="../images/ambulance_logo.png" alt="">
-        </div>
-        <div class="text">
-            <p class="alert">Alert!</p>
-            <p class="alert">Please make way to the right</p>
-            <p class="alert">Emergency services need this path</p>
-        </div>
-        <div class="icon">
-            <img src="../images/right_arrow.png" alt="">
-        </div>
-    </div>
+    
     <div class="container">
         <div class="item" id="floating-panel">
             <div class="options">
@@ -31,6 +19,7 @@
                 <select class="floating-item" id="start">
                     <option value="{13.011053,77.554939}">Orion Mall</option>
                     <option value="{13.0283,77.5731}">Truffles</option>
+                    <option value="{13.0328,77.5697}">Milanos</option>
                 </select>
             </div>
             <div class="options">
@@ -38,12 +27,26 @@
                 <select class="floating-item" name="end" id="end">
                     <option value="{13.0306,77.5649}">Ramaiah Institute of technology</option>
                     <option value="{13.035781,77.597008}">Hebbal</option>
+                    <option value="{13.0665,77.5980}">Skyline Beverly Park</option>
                 </select>
             </div>
         </div>
         <div class="buttons">
             <button class="button_p" id="amb">Move User</button>
             <button class="button_p" id="switch"><a href = "../ambulance-server/client_side/ambulance.html">Back to ambulance view      </a></button>
+        </div>
+        <div class="near" id="near">
+            <div class="icon">
+                <img src="../images/ambulance_logo.png" alt="">
+            </div>
+            <div class="text">
+                <p class="alert">Alert!</p>
+                <p class="alert">Please make way to the right</p>
+                <p class="alert">Emergency services need this path</p>
+            </div>
+            <div class="icon">
+                <img src="../images/right_arrow.png" alt="">
+            </div>
         </div>
         <div class="item" id="map"></div>
     </div>

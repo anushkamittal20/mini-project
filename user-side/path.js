@@ -10,12 +10,12 @@ var directionsService;
   var directionsRenderer;
 
 var amb_button=document.getElementById("amb");
-var switch_button=document.getElementById("switch");
 
 function moveUser(){
+  // getWpFromServer();
   console.log("inside move user")
   var y={lat:waypoints[0][0],lng:waypoints[0][1]}
-  PlaceMarker(y);
+ // PlaceMarker(y);
   console.log(y);
   comparedist(y);
   directionsService
@@ -114,14 +114,28 @@ function intersectionAlgorithm(){
      comparedist(start)
 }
 
-function comparedist(coordinate){
-  var amb_cor=hello();
+async function comparedist(coordinate){
+ var amb_cor= await getWpFromServer();
   if( userLocatedWithinRadius(coordinate,amb_cor,0.250)) {
     displayToggle();
-    // break;
+    //eventlistener
+    amb_button.addEventListener('click',removeUser)
    } else{
     console.log("far away: no notification")
    }
+}
+
+async function getWpFromServer(){
+  const baseUrl = 'http://localhost:8383'
+  console.log('in the server receiving function')
+  const res = await fetch(baseUrl,{
+    method: 'GET',
+  })
+const temp= await res.json();
+console.log(temp)
+var wp={ lat: temp[0], lng: temp[1] }
+console.log(wp)
+return wp
 }
 
 function convertWaypointstoCoordinates(){
@@ -181,6 +195,9 @@ function distance(lat1, lat2, lon1, lon2) {
 }
 
 function userLocatedWithinRadius(checkPoint, centerPoint, km) {
+  console.log("within ULWR")
+  console.log(checkPoint)
+  console.log(centerPoint)
   var ky = 40000 / 360;
   var kx = Math.cos(Math.PI * centerPoint.lat / 180.0) * ky;
   var dx = Math.abs(centerPoint.lng - checkPoint.lng) * kx;
@@ -189,15 +206,15 @@ function userLocatedWithinRadius(checkPoint, centerPoint, km) {
   return Math.sqrt(dx * dx + dy * dy) <= km;
 }
 
-function PlaceMarker(x) {
+// function PlaceMarker(x) {
 
-  // setTimeout(function(){
-  marker_user = new google.maps.Marker({
-    position: x, //pass the user's location
-    map: map,
-    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-  });
-}
+//   // setTimeout(function(){
+//   marker_user = new google.maps.Marker({
+//     position: x, //pass the user's location
+//     map: map,
+//     icon: 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png',
+//   });
+// }
 
 function PlaceWaypointMarker(x) {
 
@@ -214,14 +231,13 @@ function displayToggle() {
   popup = document.getElementById("near");
   popup.style.display = "flex";
 
-  setTimeout(removeUser, 8000);
-  // removeUser();
+  //setTimeout(removeUser, 5000);
 
 }
 
 function removeUser() {
-  marker_user.setMap(null);
-  setTimeout(function () { popup.style.display = "none"; }, 3000);
+ // marker_user.setMap(null);
+  popup.style.display = "none"; 
 }
 
 function decodePath(str, precision) {

@@ -79,5 +79,5 @@ user1.addEventListener('click',function(){
     goTo("../index.html");
 })
 user2.addEventListener('click',function(){
-    goTo("path.html");
+    goTo("../user-side/path.html");
 })
