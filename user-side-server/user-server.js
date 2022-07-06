@@ -3,13 +3,12 @@ const redis = require('redis')
 const app=express()
 const port = 8383
 const client = redis.createClient({
-    url: 'redis://YOUR REDIS INSTANCE URL'
+    url: 'redis://redis-10709.c212.ap-south-1-1.ec2.cloud.redislabs.com:10709'
     //need this from benny
   })
 
   async function connect_db() {
     await client.connect()
-    const amb_wp = await client.get("next_wp")
   }
 
   async function db_get_wp() {
@@ -21,7 +20,8 @@ app.get('/',(req,res) => {
 })
 
 function hello(){
-console.log("hello server")
+  var amb = {lat: 13.01182, lng: 77.58379};
+  return amb
 }
 
 
