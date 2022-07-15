@@ -1,11 +1,16 @@
 var amb
 const express = require('express')
 const redis = require('ioredis')
+const path = require('path')
+let cors = require('cors')
 
 const app=express()
 const port = 8383
+console.log(__dirname);
+console.log(path.join(__dirname,"/public"));
+const staticPath = path.join(__dirname,"/public")
+app.use(express.static(staticPath))
 
-let cors = require('cors')
 app.use(cors())
 app.use((req,res,next)=>{
     res.setHeader('Access-Control-Allow-Origin','*');
@@ -35,10 +40,6 @@ app.get('/',(req,res) => {
     res.status(200).send(amb)
 })
 
-function hello(){
-  var amb = {lat: 13.01182, lng: 77.58379};
-  return amb
-}
 
 
 
