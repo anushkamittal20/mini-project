@@ -19,6 +19,8 @@ app.use((req,res,next)=>{
     next(); 
 })
 
+app.use(express.json())
+
 
 const password = "NZ5CaYKiyD08ITMfToscbcx3sJqQkKXD"
 var url = `redis://default:${password}@redis-10983.c299.asia-northeast1-1.gce.cloud.redislabs.com:10983`
@@ -40,8 +42,19 @@ app.get('/',(req,res) => {
     res.status(200).send(amb)
 })
 
+app.get('/info',(req,res)=>{
+  // res.send('hey there!!');
+  res.status(200).json({info: 'hey'})
+})
 
-
+app.get('/user.html',async(req,res)=>{
+  try {
+      res.sendFile(path.join(__dirname,'/public/path.html'))
+      
+  } catch (error) {
+      console.log(error);
+  }
+})
 
 app.listen(port,() => console.log(`Server started on port ${port}`))
 
